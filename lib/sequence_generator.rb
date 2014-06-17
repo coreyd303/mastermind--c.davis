@@ -9,18 +9,16 @@ class SequenceGenerator
   end
 
   def generate
-    code = (0...length).collect{pool.sample}.join
-    Sequence.new(code)
+    master_sequence = (0...length).collect{pool.sample}.join
+    Sequence.new(master_sequence)
     #puts "I've created a new master sequence..."
   end
 end
 
 class Sequence
-  attr_reader :code
+  attr_reader :master_sequence
 
-  def initialize(code)
-    @code = code
+  def initialize(master_sequence)
+    @master_sequence = master_sequence
   end
 end
-
-#s = Sequence.new(4, ["b", "g", "r", "y"])
