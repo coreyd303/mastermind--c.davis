@@ -1,7 +1,6 @@
-class Guess
+class GuessValidator
 
-  attr_accessor :guess
-
+  attr_reader :guess
   def initialize(guess)
     @guess = guess
   end

@@ -1,5 +1,4 @@
 
-# some possibly helpful code to look at (This is Jeffs, DON"T USE IT!!!)
 class SequenceGenerator
 
   attr_reader :length, :pool
@@ -9,16 +8,16 @@ class SequenceGenerator
   end
 
   def generate
-    master_sequence = (0...length).collect{pool.sample}.join
-    Sequence.new(master_sequence)
+    secret = (0...length).collect{pool.sample}.join
+    Sequence.new(secret)
     #puts "I've created a new master sequence..."
   end
 end
 
 class Sequence
-  attr_reader :master_sequence
+  attr_reader :secret
 
-  def initialize(master_sequence)
-    @master_sequence = master_sequence
+  def initialize(secret)
+    @secret = secret
   end
 end

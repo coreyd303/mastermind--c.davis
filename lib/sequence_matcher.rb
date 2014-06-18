@@ -1,24 +1,35 @@
 class SequenceMatcher
+  attr_reader :secret, :guess
 
-  attr_reader :master_sequence, :guess
-  def initialize(master_sequence, guess)
-    @master_sequence = master_sequence
-    @guess = guess
+  def initialize(secret, guess)
+    @secret = secret
+    @guess  = guess
   end
 
   def match?
-    guess == master_sequence
+    guess == secret
   end
 
   def match_count
-    letters = []
-    g = guess.chars
-    m = master_sequence.chars
+    guess_chars  = guess.chars
+    secret_chars = secret.chars
+    count        = 0
 
-      letters = g.map do |letter| letter if m.include?(letter)
+    guess_chars.each do |char|
+      if secret_chars.include?(char)
+        count += 1
+        secret_chars.slice!(secret_chars.index(char))
       end
+    end
 
-    letters.join.length
+    return count
+  end
+
+  def position_count
+
+
+
+
   end
 
 
