@@ -22,16 +22,29 @@ class SequenceMatcher
       end
     end
 
-    return count
+    count
   end
 
-  def position_count
+  def match_position
+    guess_chars  = guess.chars
+    secret_chars = secret.chars
+    count        = 0
 
+    guess_chars.each_with_index do |letter, index|
+      count += 1 if letter == secret_chars[index]
+    end
 
-
-
+    count
   end
 
-
-
+  # def position_count
+  #   guess_chars = guess.chars
+  #   secret_chars = secret.chars
+  #   count = 0
+  #
+  #   guess_chars.each do |char|
+  #     if secert_chars.SOMETHING?(char)
+  #
+  #
+  # end
 end

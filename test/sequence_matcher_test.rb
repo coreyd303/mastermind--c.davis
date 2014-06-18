@@ -59,6 +59,7 @@ class SequenceMatcherTest < Minitest::Test
   end
 
   def test_it_can_count_a_matching_position
+    skip
     matcher = SequenceMatcher.new("ybgr", "ygrb")
     refute matcher.match?
 
@@ -67,9 +68,18 @@ class SequenceMatcherTest < Minitest::Test
 
 
   def test_it_can_count_multiple_matching_positions
+    skip
     matcher = SequenceMatcher.new("ybgr", "ybrg")
     refute matcher.match?
 
     assert_equal 2, matcher.position_count
+  end
+
+  def test_it_can_count_more_matching_positions
+    skip
+    matcher = SequenceMatcher.new("ybbr", "ybbr")
+    assert matcher.match?
+
+    assert_equal 4, matcher.position_count
   end
 end
