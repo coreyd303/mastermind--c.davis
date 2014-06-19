@@ -56,7 +56,7 @@ class CLI
   def execute_game(user_guess)
     turns.add_guess(user_guess)
     matcher = SequenceMatcher.new(secret, user_guess)
-    print @secret
+    #print @secret
     puts ''
     if matcher.match?
       play_again
