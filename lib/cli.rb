@@ -45,8 +45,7 @@ class CLI
   end
 
   def guess_receiver
-    print "I have generated a secret sequence"
-    print "What is your guess mortal?:"
+    print "What is your guess pitiful mortal?:"
     user_guess = ''
       until user_guess == "q"
         user_guess = gets.chomp
@@ -61,9 +60,15 @@ class CLI
   end
 
   def execute_game(user_guess)
-    matcher        = SequenceMatcher.new(secret, user_guess)
-    match_count    = matcher.match_count
-    match_position = matcher.match_position
-    puts "You have #{match_count} matches in #{match_position} correct positions..."
+    matcher = SequenceMatcher.new(secret, user_guess)
+    print @secret
+    puts ''
+    if matcher.match?
+      puts "YOU'VE WON THIS TIME MORTAL! NEXT TIME YOU WILL NOT BE SO LUCKY!"
+    else
+      match_count    = matcher.match_count
+      match_position = matcher.match_position
+      puts "You have #{match_count} matches in #{match_position} correct positions..."
+    end
   end
 end
