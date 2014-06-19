@@ -14,14 +14,12 @@ class SequenceMatcher
     guess_chars  = guess.chars
     secret_chars = secret.chars
     count        = 0
-
     guess_chars.each do |char|
       if secret_chars.include?(char)
         count += 1
         secret_chars.slice!(secret_chars.index(char))
       end
     end
-
     count
   end
 
@@ -36,15 +34,4 @@ class SequenceMatcher
 
     count
   end
-
-  # def position_count
-  #   guess_chars = guess.chars
-  #   secret_chars = secret.chars
-  #   count = 0
-  #
-  #   guess_chars.each do |char|
-  #     if secert_chars.SOMETHING?(char)
-  #
-  #
-  # end
 end

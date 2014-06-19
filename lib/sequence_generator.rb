@@ -1,3 +1,5 @@
+require_relative '../lib/sequence'
+
 class SequenceGenerator
 
   attr_reader :length, :pool
@@ -9,6 +11,5 @@ class SequenceGenerator
   def generate
     secret = (0...length).collect{pool.sample}.join
     Sequence.new(secret)
-    #puts "I've created a new master sequence..."
   end
 end

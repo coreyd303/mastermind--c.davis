@@ -1,26 +1,26 @@
 class GuessValidator
 
-  attr_reader :guess, :length  # => nil
+  attr_reader :guess, :length
   def initialize(guess)
-    @guess = guess.chars       # => ["r", "g", "b", "y"]
-    @length = guess.length     # => 4
+    @guess = guess.chars
+    @length = guess.length
   end
 
 
   def valid?
-    length? && correct_characters?  # => true
+    length? && correct_characters?
   end
 
   def length?
-    @length == 4  # => true
+    @length == 4
   end
 
   def correct_characters?
-    input = guess          # => ["r", "g", "b", "y"]
-    valid = %w(r g b y)    # => ["r", "g", "b", "y"]
+    input = guess
+    valid = %w(r g b y)
 
-    invalid_characters = input - (input & valid)  # => []
-    invalid_characters.empty?                     # => true
+    invalid_characters = input - (input & valid)
+    invalid_characters.empty?
   end
 
 end

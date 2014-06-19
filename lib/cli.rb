@@ -1,24 +1,19 @@
 class CLI
-  attr_reader :command, :secret
+  attr_reader :command, :secret, :sequence
+  attr_accessor :turns
 
   def initialize
-    @command = ''
-    sequence = SequenceGenerator.new(4, %w[r g b y]).generate
-    @secret  = sequence.secret
+    @wizard = Wizard.new
+    puts @wizard
   end
 
   def start
+    @command = ''
+    @sequence = SequenceGenerator.new(4, %w[r g b y]).generate
+    @secret  = sequence.secret
+    @turns = TurnCounter.new
     puts "Welcome Mortal to: MASTERMIND"
-    puts 'Would you like to (p)lay, read (i)nstructions, or (q)uit and run for your life?'
-    command = gets.chomp.downcase
-    case command
-    when 'p'
-      guess_receiver
-    when 'i'
-      instructions
-    when 'q'
-      puts "Farewell worthless mortal!"
-    end
+    execute_command
   end
 
   def instructions
@@ -33,14 +28,19 @@ class CLI
     mortal mind becomes too weak you may quit the game and slink off into your mortal
     peril by entering the command (q)uit. Continue if you dare!!!
     **********************************************************************************"
+    execute_command
+  end
 
-    puts 'Would you like to (p)lay or (q)uit and run for your life?'
+  def execute_command
+    puts 'Would you like to (p)lay, read (i)nstructions, or (q)uit and run for your life?'
     command = gets.chomp.downcase
     case command
-    when 'p'
-      guess_receiver
-    when 'q'
-      puts "Farewell worthless mortal!"
+      when 'p'
+        guess_receiver
+      when 'i'
+        instructions
+      when 'q'
+        puts "Farewell worthless mortal!"
     end
   end
 
@@ -56,15 +56,17 @@ class CLI
           puts "YOUR GUESS IS NOT VALID MORTAL! Guesses must be in the format: rgby"
         end
       end
-    puts "Farewell worthless mortal!"
   end
 
   def execute_game(user_guess)
+    turns.add_guess(user_guess)
     matcher = SequenceMatcher.new(secret, user_guess)
-    print @secret
+    # print @secret
     puts ''
     if matcher.match?
       puts "YOU'VE WON THIS TIME MORTAL! NEXT TIME YOU WILL NOT BE SO LUCKY!"
+      puts "It only took you a mere #{turns.guess_history.count} trys..."
+      start
     else
       match_count    = matcher.match_count
       match_position = matcher.match_position
