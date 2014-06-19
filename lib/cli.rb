@@ -1,4 +1,4 @@
-require 'colorize'
+#require 'colorize'
 
 class CLI
   attr_reader :command, :secret, :sequence
