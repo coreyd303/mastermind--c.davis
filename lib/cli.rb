@@ -56,14 +56,14 @@ class CLI
   def execute_game(user_guess)
     turns.add_guess(user_guess)
     matcher = SequenceMatcher.new(secret, user_guess)
-    #print @secret
+    print @secret
     puts ''
     if matcher.match?
       play_again
     else
       match_count    = matcher.match_count
       match_position = matcher.match_position
-      puts "You #{match_count} correct letters, #{match_position} of them in the correct position...".red
+      puts "You have #{match_count} correct letters, #{match_position} of them in the correct position...".red
     end
   end
 
